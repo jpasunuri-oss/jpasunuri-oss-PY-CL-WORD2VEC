@@ -39,7 +39,11 @@ def sampleW2V():
 
 # TODO: complete the following function to retrieve vector representation of an input word. You should also make sure if it doesn't know the word, it returns -1, it will not crash.(aka, catch the KeyError)
 def retrieveVector(input_word):
-    return -1
+
+    try:
+        return w2v[input_word]
+    except KeyError as err:
+        return -1
 """
 We can also do similarity comparisions using the Word2Vec model.
 """
@@ -64,17 +68,17 @@ def sampleSimilarity():
 
 # TODO: Complete the following function so that it calculates the similarity between two words and the similarity index is greater than 0.4
 def similarPairExercise():
-    word1 = ""
-    word2 = ""
-    return #return w2v similarity index of word 1 and 2 here
+    word1 = "fruit"
+    word2 = "vegetable"
+    return w2v.similarity(word1, word2) #return w2v similarity index of word 1 and 2 here
 
 # TODO: Complete the following function so that w2v model retrieves top 'max_limit' number of the words you provide 
 def retrieveSimilarWordsExercise(max_limit: int):
-    words = [] #provide your own words that you want the results to be similar to
+    words = ['fruits'] #provide your own words that you want the results to be similar to
 
-    return#grab max_limit number of words similar to words appearing in words
+    return w2v.most_similar(positive = words, topn=2) #grab max_limit number of words similar to words appearing in words
 
 # TODO: Complete the following function to return the word that is the least similar in the given list. 
 def w2vDoesntMatchExercise(words: list[str]):
     
-    return # return the least similar word in the words list 
+    return w2v.doesnt_match(words) # return the least similar word in the words list 
